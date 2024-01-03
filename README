@@ -1,0 +1,60 @@
+File: ex8a.c
+ ========================================
+
+File: ex8a1.c
+ ========================================
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+
+This program defines in a shared memory an array of integers.
+To the first cell he enters his id. 
+Then he goes to sleep until he gets a signal and then he shows 
+how many different values there are in the array, what is the
+smallest value and what is the largest value.
+
+Compile: gcc -Wall -o ex8a1 -l pthread ex8a1.c
+
+Run: ex8a1
+
+File: ex8a2.c 
+ ========================================
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+
+This program Log in to the shared memory assigned by the ex8a1
+program. The program will run in a loop. each round in a loop The
+program produces a number if it is prime it adds it to the array 
+in the shared memory. She counts how many new values she added.
+Finally she prints how many new values she added to the array
+
+Compile: gcc -Wall -o ex8a2 -l pthread ex8a2.c
+
+Run: ex8a2 1
+(and respectively 2 for the second copy and 3 for the third copy)
+
+race modes:i don't find any race modes
+
+File: ex8b.c
+ ========================================
+
+ Writen by: Rotem Kashani , id = 209073352 , login = rotemkash 
+	    Mahmood Jazmawy , id= 211345277, login=Mahmoodja
+
+ The program defines a global array of 1000 cells. 
+ The main thread: the array owner
+ It creates 3 threads and then it waits for them and when they finish it means 
+ that the array is full and  then it shows how many values ​​have been added to
+ the array and which are the maximum and the minimum.
+ Three Sub threads: Prime Number Producers
+ Each thread draws a random number and tries to add it to the array.
+ For the test + addition: the thread lock the semaphore and thereby 
+ gain (this time: for real) the right to scan the array alone. Finally he releases the semaphore.
+ If a thread found all the cells of the array full (or it failed a hundred times
+ in a row to add a new value) it print how many new primes he added to the array and finish.
+ Only one thread print after filling the array the output done,this will happen with the
+ pthread_once mechanism.
+
+Compile: gcc -Wall -lpthread ex8b.c -o ex8b
+
+Run: ex8b 
+
